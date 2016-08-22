@@ -1,0 +1,23 @@
+-IC:\D\dwt\import\imp
+-JC:\D\dwt\import\res
+-op
+#-L/SUBSYSTEM:CONSOLE:4.0  console application
+-L/SUBSYSTEM:WINDOWS:4.0
+-LC:\D\dwt\import\lib\
+advapi32.lib
+comctl32.lib
+comdlg32.lib
+gdi32.lib
+kernel32.lib
+shell32.lib
+ole32.lib
+oleaut32.lib
+olepro32.lib
+oleacc.lib
+user32.lib
+usp10.lib
+msimg32.lib
+opengl32.lib
+shlwapi.lib
+dwt-base.lib
+org.eclipse.swt.win32.win32.x86.lib
