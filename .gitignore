@@ -1,3 +1,8 @@
+#
+*.exe
+*.obj
+*_debug_log.txt
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

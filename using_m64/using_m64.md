@@ -1,9 +1,9 @@
 
-## D言語 dmd/ldc のインストールメモ(Windows 64bitアプリケーション編)
+## □ D言語 dmd/ldc のインストールメモ(Windows 64bitアプリケーション編)
 
 Windows 10 にアップデートしたことを機会に dmd/ldc のインストール環境をまとめました。
 
-## Windows 64bit な.EXEを作るには
+## □ Windows 64bit な.EXEを作るには
 dmd は -m64 オプションにより 64bitのObjectファイルを出力することができますが
 付属の link.exe(optlink) は 16/32bit用なので Windows 64bitのリンクができません
 そこで、Microsoft Visual C++ の link.exe/Runtime を利用し Windows 64bit .EXE を作ります。
@@ -11,8 +11,9 @@ dmd は -m64 オプションにより 64bitのObjectファイルを出力する�
 
 
 
-## 一般的なインストール方法(dmd)
+## □ 一般的なインストール方法(dmd)
 おおまかなインストール手順は以下です。
+
 
 1. Visual C++ をインストール
 1. dmd Windows版でインストール
@@ -20,11 +21,12 @@ dmd は -m64 オプションにより 64bitのObjectファイルを出力する�
 
 
 
-### Visual C++ をインストール
-Visual C++ は Visual Studio Community 2005 をインストールしました
-なお Visual C++ はオプションで指定しないとインストールされないので注意が必要です
+### □ Visual C++ をインストール
+Visual C++ は Visual Studio Community 2005 よりインストールしました
+なお Visual C++ はオプションを指定しないとインストールされないので注意が必要です
 
-![VisualStadioComm2015_setup.png](https://https://github.com/SeijiFujita/quiita_work/blob/master/using_m64/VisualStadioComm2015_setup.png)
+![VisualStadioComm2015_setup.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/VisualStudioComm2015_setup.png)
+
 
 以下にダウンロードのリンクや解説サイトのリンク
 - Community 2015 JPN Direct download link https://www.visualstudio.com/post-download-vs?sku=community&clcid=0x411
@@ -32,22 +34,24 @@ Visual C++ は Visual Studio Community 2005 をインストールしました
 - Visual Studio 2015の解説 http://www.atmarkit.co.jp/ait/articles/1508/07/news031.html
 
 
-### dmd Windows版でインストール
+### □ dmd Windows版でインストール
 dmd Windows版インストーラを使い dmd本体および Visual D のインストールを行います。
 注意点は Visual D(Visual Studio D extension)をチェックしインストールしてください
 Visual D のインストーラは Visual C++ が設定した環境変数 VCINSTALLDIR を見て dmd2/windows/bin/sc.ini 設定します。
 
-![VisualStadioComm2015_setup.png](https://https://github.com/SeijiFujita/quiita_work/blob/master/using_m64/VisualStadioComm2015_setup.png)
+![DMDInstaller_SelectVisualD.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/DMDInstaller_SelectVisualD.png)
 
 
+以下にダウンロードのリンクや解説サイトのリンク
 - dmd download Page (Windows exe) https://dlang.org/download.html
 - dmd Release Archive http://downloads.dlang.org/releases/
 
 
-### 設定が有効であるか確認しましょう
+### □ 設定が有効であるか確認しましょう
 インストールが終わったら以下のソースコードをコンパイル
 
-*テスト用ソースコード
+
+テスト用ソースコード
 
 ```d:hello.d
 // Written in the D programming language.
@@ -91,7 +95,8 @@ int main()
 ```
 
 
-*Build.bat ファイル
+実行用の Build.bat ファイル
+
 ```bat:Build.bat
 @echo off
 rem ---- DMD
@@ -112,11 +117,12 @@ dmd -wi -m64 -ofhello64.exe hello.d
 hello64.exe
 
 echo done...
+pause 
 
 ```
 
 
-*以下のような表示されいればＯＫ
+*Build.bat を実行したら以下のような表示されいればＯＫ
 
 ```d
 Win32
@@ -134,33 +140,35 @@ done...
 
 
 
-## LDCのインストール
+## □ LDCのインストール
 LDC はコンパイル済みのアーカイブを展開しインストールします。
 すでに、Visual C++ をインストールされている場合は再びインストール必要はありません!!
+LDC は クロスコンパイルはできないようですので、64bit .EXEを作るには LDC win64-msvc を
+32bit .EXE を作るには LDC win32-msvc がひつようです。
+
 おおかまな手順を以下に示します。
 
-
 1. Visual C++ をインストール
-1. ldcdmd Windows版でインストール
+1. LDC win32-msvc/win64-msvc をダウンロードしインストール
 1. 設定が有効であるか確認
 
 
-##
+## □ LDC win32-msvc/win64-msvc をダウンロードしインストール
 
 - LDC v1.0.0 release https://github.com/ldc-developers/ldc/releases/tag/v1.0.0
 - LDC win32-msvc Direct download link https://github.com/ldc-developers/ldc/releases/download/v1.0.0/ldc2-1.0.0-win32-msvc.zip
 - LDC win64-msvc Direct download link https://github.com/ldc-developers/ldc/releases/download/v1.0.0/ldc2-1.0.0-win64-msvc.zip
 
 
+## □ 設定が有効であるか確認
 
 
 
-## dmdを.7zを展開して使っている人向け解説です。
+## □ dmdを.7zを展開して使っている人向け解説です。
 
 ## .dmdのsc.iniの書き換え
 
 
-## .設定が有効であるか確認
 
 
 

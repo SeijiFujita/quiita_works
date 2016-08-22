@@ -18,6 +18,8 @@ hello64.exe
 del *.obj
 
 echo done...
+
+pause 
 goto :eof
 -----------------------------------
 C:\D\rakugaki\quiita_works\using_m64>dmd -v 
