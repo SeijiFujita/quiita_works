@@ -11,19 +11,20 @@ dmd は -m64 オプションにより 64bitのObjectファイルを出力する�
 
 
 
-## □ 一般的なインストール方法(dmd)
+## □ DMD のインストール
 おおまかなインストール手順は以下です。
 
 
 1. Visual C++ をインストール
 1. dmd Windows版でインストール
-1. 設定が有効であるか確認
+1. dmd インストールの確認
 
 
 
-### □ Visual C++ をインストール
-Visual C++ は Visual Studio Community 2005 よりインストールしました
-なお Visual C++ はオプションを指定しないとインストールされないので注意が必要です
+### Visual C++ をインストール
+Visual C++ は Visual Studio Community 2005 よりインストールしました、
+インストールするパスはデフォルト、なお Visual C++ はオプションを
+指定しないとインストールされないので注意が必要です。
 
 ![VisualStadioComm2015_setup.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/VisualStudioComm2015_setup.png)
 
@@ -34,10 +35,12 @@ Visual C++ は Visual Studio Community 2005 よりインストールしました
 - Visual Studio 2015の解説 http://www.atmarkit.co.jp/ait/articles/1508/07/news031.html
 
 
-### □ dmd Windows版でインストール
+### dmd Windows版でインストール
 dmd Windows版インストーラを使い dmd本体および Visual D のインストールを行います。
-注意点は Visual D(Visual Studio D extension)をチェックしインストールしてください
-Visual D のインストーラは Visual C++ が設定した環境変数 VCINSTALLDIR を見て dmd2/windows/bin/sc.ini 設定します。
+注意点は Visual D(Visual Studio D extension)をチェックしインストールしてください、
+Visual D のインストーラは Visual C++ が設定した環境変数 VCINSTALLDIR を見て
+ dmd2/windows/bin/sc.ini 設定します。
+本体をインストールするパスは 'C:\D' など短くて間違いのないパスを指定しましょう。
 
 ![DMDInstaller_SelectVisualD.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/DMDInstaller_SelectVisualD.png)
 
@@ -47,11 +50,11 @@ Visual D のインストーラは Visual C++ が設定した環境変数 VCINSTA
 - dmd Release Archive http://downloads.dlang.org/releases/
 
 
-### □ 設定が有効であるか確認しましょう
+### dmd インストールの確認
 インストールが終わったら以下のソースコードをコンパイル
 
 
-テスト用ソースコード
+- テスト用ソースコード
 
 ```d:hello.d
 // Written in the D programming language.
@@ -95,14 +98,13 @@ int main()
 ```
 
 
-実行用の Build.bat ファイル
+- 実行用の Build.bat ファイル
+注意点は Build.bat の環境変数 path はdmdインストール環境に設定してください。
 
 ```bat:Build.bat
-@echo off
-rem ---- DMD
-path=C:\D\dmd.2.071.0\windows\bin;
+rem ---- DMD path
+path=C:\D\dmd.2.071.1\windows\bin;
 
-@echo on
 
 dmd -wi -m32 -ofhello32.exe hello.d
 @if ERRORLEVEL 1 goto :eof
@@ -122,9 +124,9 @@ pause
 ```
 
 
-*Build.bat を実行したら以下のような表示されいればＯＫ
+- Build.bat の実行結果が以下のように表示されいればＯＫ
 
-```d
+```console
 Win32
 CRuntime_DigitalMars
 ##------------------
@@ -141,64 +143,83 @@ done...
 
 
 ## □ LDCのインストール
-LDC はコンパイル済みのアーカイブを展開しインストールします。
+LDC はコンパイル済みのアーカイブが提供されていますので、それを展開しインストールします。
 すでに、Visual C++ をインストールされている場合は再びインストール必要はありません!!
-LDC は クロスコンパイルはできないようですので、64bit .EXEを作るには LDC win64-msvc を
-32bit .EXE を作るには LDC win32-msvc がひつようです。
+詳しくは調べていませんが LDC はクロスコンパイルはできないようですので
+64bit .EXEを作るには LDC win64-msvc を 32bit .EXE を作るには LDC win32-msvc が必要で
 
-おおかまな手順を以下に示します。
+-おおかまな手順を以下に示します。
 
 1. Visual C++ をインストール
-1. LDC win32-msvc/win64-msvc をダウンロードしインストール
-1. 設定が有効であるか確認
+1. LDC win32-msvc / win64-msvc をダウンロードし展開
+1. LDC インストールの確認
 
 
-## □ LDC win32-msvc/win64-msvc をダウンロードしインストール
+### LDC win32-msvc/win64-msvc をダウンロードし展開
+
 
 - LDC v1.0.0 release https://github.com/ldc-developers/ldc/releases/tag/v1.0.0
 - LDC win32-msvc Direct download link https://github.com/ldc-developers/ldc/releases/download/v1.0.0/ldc2-1.0.0-win32-msvc.zip
 - LDC win64-msvc Direct download link https://github.com/ldc-developers/ldc/releases/download/v1.0.0/ldc2-1.0.0-win64-msvc.zip
 
 
-## □ 設定が有効であるか確認
+## LDC のインストールの確認
+
+- 実行用の Build.bat ファイル、ソースファイルは前回の hello.d を使います。
+
+```bat:Build_ldc.bat
+
+@echo off
+set LDC_VSDIR=C:\Program Files (x86)\Microsoft Visual Studio 14.0\
+rem set VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\
+
+setlocal
+path=C:\D\ldc2-1.0.0-win32-msvc\bin;%VCINSTALLDIR%\bin;c:\windows\system32;
+call msvcEnv.bat x86
+
+ldc2 -m32 -ofhello32.exe hello.d
+@if ERRORLEVEL 1 goto :eof
+hello32.exe
+endlocal
+
+setlocal
+path=C:\D\ldc2-1.0.0-win64-msvc\bin;%VCINSTALLDIR%\bin;c:\windows\system32;
+call msvcEnv.bat amd64
+
+ldc2 -m64 -ofhello64.exe hello.d
+@if ERRORLEVEL 1 goto :eof
+hello64.exe
+endlocal
+
+echo done...
+pause
+```
 
 
+- Build_ldc.bat の実行結果が以下のように表示されいればＯＫ
 
-## □ dmdを.7zを展開して使っている人向け解説です。
-
-## .dmdのsc.iniの書き換え
-
-
-
-
-
-
-
-
-
-C:\D\dmd.2.071.0\windows\bin\sc.ini
-
-VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\
-WindowsSdkDir=C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\
+```console
+Using Visual Studio: C:\Program Files (x86)\Microsoft Visual Studio 14.0\
+Win32
+CRuntime_Microsoft
+##------------------
+Using Visual Studio: C:\Program Files (x86)\Microsoft Visual Studio 14.0\
+Win64
+CRuntime_Microsoft
+##------------------
+done...
+```
 
 
+## □ おまけ
+ dmd を dmd.2.071.1.windows.7z を展開して使っている場合やソースからビルドして使っている場合は
+以下のsc.ini を windows\bin\sc.ini に置き換えると -m64 が有効になるかもしれません(VC++ の位置はデフォルトpath)
 
 
-![helloworld.png](https://.png)
-
-
-
-
-
-tag: dlang
-filename: using_m64.md
-last update: 2016/05/1
-
-
+```cfg dmd2/window/bin/sc.ini
 
 [Version]
 version=7.51 Build 020
-
 
 ; environment for both 32/64 bit
 [Environment]
@@ -208,11 +229,9 @@ DFLAGS="-I%@P%\..\..\src\phobos" "-I%@P%\..\..\src\druntime\import"
 ; from the Environment32 section (bugzilla 11302)
 LIB="%@P%\..\lib"
 
-
 [Environment32]
 LIB="%@P%\..\lib"
 LINKCMD=%@P%\link.exe
-
 
 [Environment64]
 LIB="%@P%\..\lib64"
@@ -224,7 +243,6 @@ DFLAGS=%DFLAGS% -L/OPT:NOICF
 ; for VS2008, VS2010, VS2012, and VS2013. This will be overridden below if the
 ; installer detects VS.
 LINKCMD=%VCINSTALLDIR%\bin\link.exe
-
 
 ; -----------------------------------------------------------------------------
 ; This enclosed section is specially crafted to be activated by the Windows
@@ -239,7 +257,6 @@ LINKCMD=%VCINSTALLDIR%\bin\link.exe
 ; recommended to install the Windows SDK 7.1A. Alternatively you can set
 ; LINKCMD as the path to link.exe SDK 7.0A installs. It would typically be:
 ;   C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\amd64\link.exe
-
 
 ; Windows installer replaces the following lines with the actual paths
 VCINSTALLDIR=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\
@@ -260,8 +277,6 @@ PATH=%PATH%;%VCINSTALLDIR%\bin\x86_amd64;%VCINSTALLDIR%\bin
 ;VC2012 PATH=%PATH%;%VCINSTALLDIR%\bin\x86_amd64;%VCINSTALLDIR%\..\Common7\IDE
 
 ; ----------------------------------------------------------------------------
-
-
 ; Add the library subdirectories of all VC and Windows SDK versions so things
 ; just work for users using dmd from the VS 64-bit Command Prompt
 
@@ -284,7 +299,6 @@ LIB=%LIB%;"%WindowsSdkDir%\Lib\x64"
 ; DirectX (newer versions are included in the Platform SDK but this
 ; will allow us to support older versions)
 LIB=%LIB%;"%DXSDK_DIR%\Lib\x64"
-
 
 ; -----------------------------------------------------------------------------
 [Environment32mscoff]
@@ -331,4 +345,10 @@ LIB=%LIB%;"%WindowsSdkDir%\Lib"
 ; will allow us to support older versions)
 LIB=%LIB%;"%DXSDK_DIR%\Lib\x86"
 
+```
+
+----
+tag: dlang
+filename: using_m64.md
+last update: 2016/05/1
 
