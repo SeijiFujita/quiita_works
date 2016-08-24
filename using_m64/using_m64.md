@@ -1,58 +1,58 @@
 
 ## □Ｄ言語 DMD/LDC のインストールメモ(Windows 64bitアプリケーション編)
 
-Windows 10 にアップデートしたことを機会に、Visual Studio を Community 2015に統一し、
-"なにげ"やっていた DMD/LDC のインストール手順をまとめました。
+Windows 10 にアップデートしたことを機会に、Visual Studio を Community 2015に統合?したので
+なにげなくやっていた DMD/LDC (64bit.EXEを作成)のインストール手順をまとめました。
 
 ## □Windows 64bit な.EXEを作るには
-DMD は単体で 32bit な.EXEを作る事ができますが、64bit な.EXEは作る事ができません。
+DMD は単体で 32bit な.EXEを作る事ができますが、64bitな.EXEは作る事ができません。
 もちろん dmd -m64 オプションにより 64bitのObjectファイルを出力することができますが、
 付属の link.exe(optlink) は 16/32bit用なので Windows 64bitのリンクができません。
-そこで、Microsoft Visual C++ の link.exe/Runtime を利用し Windows 64bit .EXE の作り方
-を説明します。また、LDC も link.exe/Runtime が付属していないので同様の方法で対応します。 
+そこで、Microsoft Visual C++ の link.exe/Runtime を利用し Windows 64bit .EXE の作り方を説明します。
+また、LDC も link.exe/Runtime が付属していないので同様の方法で対応します。 
 
 
 
 ## □DMD のインストール
-おおまかなインストール手順は以下です。Visual C++をインストールし
-DMD Windowsインストーラ版で "Visual D" をチェックすれば間違えなくインストールできます。
-
+非常に簡単です、Visual C++をインストールし、DMD のWindowsインストーラ版(exe)でインストールを行います。
 
 1. Visual C++ をインストール
-1. DMD Windows版でインストール
+1. DMD を Windowsインストーラ版でインストール
 1. DMD インストールの確認
 
 
 
 ### Visual C++ をインストール
-Visual C++ は Visual Studio Community 2015 よりインストールしました、
+Visual C++ は Visual Studio Community 2015 よりインストール、
 インストールするパスはデフォルト、なお Visual C++ はオプションを
 指定しないとインストールされないので注意が必要です。
+
+
+以下にダウンロードのリンクや解説サイトのリンク
+- Community 2015 日本語版ダイレクトリンク https://www.visualstudio.com/post-download-vs?sku=community&clcid=0x411
+- Visual Studio Community 2015 HomePage https://www.visualstudio.com/ja-jp/downloads/download-visual-studio-vs.aspx
+- atmarkit Visual Studio 2015の解説 http://www.atmarkit.co.jp/ait/articles/1508/07/news031.html
+
 
 ![VisualStadioComm2015_setup.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/VisualStudioComm2015_setup.png)
 
 
-以下にダウンロードのリンクや解説サイトのリンク
-- Community 2015 JPN Direct download link https://www.visualstudio.com/post-download-vs?sku=community&clcid=0x411
-- Visual Studio Community 2015 Page https://www.visualstudio.com/ja-jp/downloads/download-visual-studio-vs.aspx
-- Visual Studio 2015の解説 http://www.atmarkit.co.jp/ait/articles/1508/07/news031.html
-
-
-
-### DMD Windows版でインストール
-DMD Windows版インストーラを使い dmd本体および Visual D のインストールを行います。
-注意点は Visual D(Visual Studio D extension)をチェックしインストールしてください、
-Visual D のインストーラは Visual C++ が設定した環境変数 VCINSTALLDIR を見て
- dmd2/windows/bin/sc.ini 設定します。
-本体をインストールするパスは 'C:\D' など短くて間違いのないパスを指定しましょう。
-
-![DMDInstaller_SelectVisualD.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/DMDInstaller_SelectVisualD.png)
+### DMD を Windowsインストーラ版でインストール
+DMD は .7z アーカイブ版と Windowsインストーラ版がダウンロード可能です。
+Windowsインストーラ版を使い dmd 本体および Visual D のインストールを行います。
 
 
 以下にダウンロードのリンクや解説サイトのリンク
-- DMD download Page (Windows exe) https://dlang.org/download.html
+- DMD download Page (Windowsの'exe'をダウンロード) https://dlang.org/download.html#dmd
 - DMD Release Archive http://downloads.dlang.org/releases/
 
+注意点
+-ダウンロードページ内の Windowsインストーラ版(Windows exe)をダウンロード
+-インストール時に Visual D(Visual Studio D extension)をチェックしインストールしてください、
+-DMDをインストールするパスは 'C:\D' など間違いのないパスを指定しましょう。
+
+
+![DMDInstaller_SelectVisualD.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/DMDInstaller_SelectVisualD.png)
 
 
 ### DMD インストールの確認
@@ -107,7 +107,7 @@ int main()
 
 
 - 実行用の Build.bat ファイル
-注意点は Build.bat の環境変数 path はdmd.exeのディレクトリを環境に設定してください。
+注意点は Build.bat の環境変数 path はdmd.exeのディレクトリを設定してください。
 
 ```bat:Build.bat
 rem ---- DMD path
@@ -151,10 +151,10 @@ done...
 
 ## □LDCのインストール
 LDC はコンパイル済みのアーカイブが提供されていますので、それを展開しインストールします。
-すでに、Visual C++ をインストールされている場合は再びインストール必要はありません!!
+もちろん既に、Visual C++ をインストールされている場合は再びインストール必要はありません!!
 詳しく追及していませんが現時点(LDC v1.0.0)では LDC はクロスコンパイルはできないようですので
 64bit .EXEを作るには LDC win64-msvc を 32bit .EXE を作るには LDC win32-msvc が必要です。
--ldc2-1.1.0-beta2-win64-msvc.zip は win32/64bit のクロスコンパイルが可能です。
+-補足 ldc2-1.1.0-beta2-win64-msvc.zip は win32/64bit のクロスコンパイルが可能です。
 
 
 おおかまな手順を以下に示します。
@@ -168,9 +168,9 @@ LDC はコンパイル済みのアーカイブが提供されていますので�
 ### LDC win32-msvc/win64-msvc をダウンロードし展開
 以下のリンク先から LDC をダウンロードし 'C:\D' などに展開します。
 
-- LDC v1.0.0 release https://github.com/ldc-developers/ldc/releases/tag/v1.0.0
 - LDC win32-msvc Direct download link https://github.com/ldc-developers/ldc/releases/download/v1.0.0/ldc2-1.0.0-win32-msvc.zip
 - LDC win64-msvc Direct download link https://github.com/ldc-developers/ldc/releases/download/v1.0.0/ldc2-1.0.0-win64-msvc.zip
+- LDC v1.0.0 release page https://github.com/ldc-developers/ldc/releases/tag/v1.0.0
 
 
 
