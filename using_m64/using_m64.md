@@ -1,10 +1,10 @@
 
-## □ D言語 DMD/LDC のインストールメモ(Windows 64bitアプリケーション編)
+## □Ｄ言語 DMD/LDC のインストールメモ(Windows 64bitアプリケーション編)
 
-Windows 10 にアップデートしたことを機会に "なにげなく"やっていた 
-DMD/LDC のインストール手順をまとめました。
+Windows 10 にアップデートしたことを機会に、Visual Studio を Community 2015に統一し、
+"なにげ"やっていた DMD/LDC のインストール手順をまとめました。
 
-## □ Windows 64bit な.EXEを作るには
+## □Windows 64bit な.EXEを作るには
 DMD は単体で 32bit な.EXEを作る事ができますが、64bit な.EXEは作る事ができません。
 もちろん dmd -m64 オプションにより 64bitのObjectファイルを出力することができますが、
 付属の link.exe(optlink) は 16/32bit用なので Windows 64bitのリンクができません。
@@ -13,20 +13,19 @@ DMD は単体で 32bit な.EXEを作る事ができますが、64bit な.EXEは�
 
 
 
-## □ DMD のインストール
+## □DMD のインストール
+おおまかなインストール手順は以下です。Visual C++をインストールし
+DMD Windowsインストーラ版で "Visual D" をチェックすれば間違えなくインストールできます。
+
 
 1. Visual C++ をインストール
 1. DMD Windows版でインストール
 1. DMD インストールの確認
 
-おおまかなインストール手順は以下です。Visual C++をインストールし
-DMD Windows版インストーラで "Visual D" をチェックすれば間違えなくインストールできます。
-
 
 
 ### Visual C++ をインストール
-
-Visual C++ は Visual Studio Community 2005 よりインストールしました、
+Visual C++ は Visual Studio Community 2015 よりインストールしました、
 インストールするパスはデフォルト、なお Visual C++ はオプションを
 指定しないとインストールされないので注意が必要です。
 
@@ -146,11 +145,11 @@ done...
 
 ```
 
-- DMD のインストールはこれにて終了です。
+- DMD のインストールの説明はこれで終了。
 
 
 
-## □ LDCのインストール
+## □LDCのインストール
 LDC はコンパイル済みのアーカイブが提供されていますので、それを展開しインストールします。
 すでに、Visual C++ をインストールされている場合は再びインストール必要はありません!!
 詳しく追及していませんが現時点では LDC はクロスコンパイルはできないようですので
@@ -196,6 +195,7 @@ pause
 ```
 
 
+
 - Build_ldc.bat の実行結果が以下のように表示されいればＯＫ
 
 ```console
@@ -208,17 +208,20 @@ Hello! Win64/CRuntime_Microsoft
 done...
 ```
 
-- LDC のインストールはこれにて終了です。
+- LDC のインストールの説明はこれで終了。
 
 
+## □おわりに
+誤字, 間違い、などなど色々とツッコミがありましたらよろしくお願いします。
 
-## □ おまけ
+
+## □そして、おまけ
  dmd.2.071.1.windows.7z など展開して使っている場合やソースからビルドして使っている場合は、
 以下の sc.ini を置き換えると -m64 が有効になるかもしれません。
 
 
-```cfg dmd2/window/bin/sc.ini
 
+```cfg:sc.ini
 [Version]
 version=7.51 Build 020
 
@@ -345,10 +348,12 @@ LIB=%LIB%;"%WindowsSdkDir%\Lib"
 ; DirectX (newer versions are included in the Platform SDK but this
 ; will allow us to support older versions)
 LIB=%LIB%;"%DXSDK_DIR%\Lib\x86"
-
 ```
 
+
+
 ----
+-https://github.com/SeijiFujita/quiita_works/tree/master/using_m64
 tag: dlang
 filename: using_m64.md
 last update: 2016/08/24
