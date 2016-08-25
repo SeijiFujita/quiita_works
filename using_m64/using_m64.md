@@ -1,14 +1,43 @@
 
 ## □Ｄ言語 DMD/LDC のインストールメモ(Windows 64bitアプリケーション編)
 
-Windows 10 にアップデートしたことを機会に、Visual Studio を Community 2015に統合?したので
-なにげなくやっていた DMD/LDC (64bit.EXEを作成)のインストール手順をまとめました。
+Windows 10 にアップデートしたことを機会に、DMD/LDC (64bit.EXEのビルド含む)のあらためて見直しを行いました。
+また、Visual Studio も Community 2015に統合(まあ、不要な物もいっぱい入りますが)しました。
+はじめてＤ言語をインストールする人の参考になればと思います。
 
-## □Windows 64bit な.EXEを作るには
-DMD は単体で 32bit な.EXEを作る事ができますが、64bitな.EXEは作る事ができません。
+## □Ｄ言語の運用基礎知識
+
+1. DMD/LDC は新バージョンごとにディレクトリを作成
+1. Windows 64bit な.EXEを作るには
+
+
+### DMD/LDC は新バージョンごとにディレクトリを作成
+dmd はおおむね１〰２ヶ月ほどで新バージョンが作成されますが、古いバージョンは消しません、
+もし新しいバージョンでコンパイル時にエラーが出たらとりあえす、環境変数 PATH をコンパイルできる
+以前バージョンに戻し作業優先させましょう、しかし最近は破壊的な偏向は全くなくなりましたね。
+
+- ディレクトリのイメージ
+```console
+
+C:\D
+　├─dmd.1.076
+　├─dmd.2.063.2
+　├─dmd.2.066.2
+　├─dmd.2.069.2
+　├─dmd.2.071.1
+　├─dub-1.0.0
+　├─ldc2-1.0.0-win32-msvc
+　├─ldc2-1.0.0-win64-msvc
+　├─ldc2-1.1.0-beta2-win32-msvc
+　└─ldc2-1.1.0-beta2-win32-msvc
+
+```
+
+### Windows 64bit な.EXEを作るには
+DMD は単体で 32bitアプリケーションを作る事ができますが、64bitな.EXEは作る事ができません。
 もちろん dmd -m64 オプションにより 64bitのObjectファイルを出力することができますが、
 付属の link.exe(optlink) は 16/32bit用なので Windows 64bitのリンクができません。
-そこで、Microsoft Visual C++ の link.exe/Runtime を利用し Windows 64bit .EXE の作り方を説明します。
+そこで、Microsoft Visual C++ の link.exe/Runtime を利用し Windows 64bit .EXE を作ります。
 また、LDC も link.exe/Runtime が付属していないので同様の方法で対応します。 
 
 
@@ -37,22 +66,31 @@ Visual C++ は Visual Studio Community 2015 よりインストール、
 ![VisualStadioComm2015_setup.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/VisualStudioComm2015_setup.png)
 
 
+
+
 ### DMD を Windowsインストーラ版でインストール
 DMD は .7z アーカイブ版と Windowsインストーラ版がダウンロード可能です。
 Windowsインストーラ版を使い dmd 本体および Visual D のインストールを行います。
 
 
+
 以下にダウンロードのリンクや解説サイトのリンク
+
 - DMD download Page (Windowsの'exe'をダウンロード) https://dlang.org/download.html#dmd
 - DMD Release Archive http://downloads.dlang.org/releases/
 
+
+
 注意点
--ダウンロードページ内の Windowsインストーラ版(Windows exe)をダウンロード
--インストール時に Visual D(Visual Studio D extension)をチェックしインストールしてください、
--DMDをインストールするパスは 'C:\D' など間違いのないパスを指定しましょう。
+
+- ダウンロードページ内の Windowsインストーラ版(Windows exe)をダウンロード
+- インストール時に Visual D(Visual Studio D extension)をチェックしインストールしてください、
+- DMDをインストールするパスは 'C:\D' など間違いのないパスを指定しましょう。
 
 
 ![DMDInstaller_SelectVisualD.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/DMDInstaller_SelectVisualD.png)
+
+
 
 
 ### DMD インストールの確認
@@ -149,12 +187,15 @@ done...
 
 
 
+
+
 ## □LDCのインストール
 LDC はコンパイル済みのアーカイブが提供されていますので、それを展開しインストールします。
 もちろん既に、Visual C++ をインストールされている場合は再びインストール必要はありません!!
 詳しく追及していませんが現時点(LDC v1.0.0)では LDC はクロスコンパイルはできないようですので
 64bit .EXEを作るには LDC win64-msvc を 32bit .EXE を作るには LDC win32-msvc が必要です。
 -補足 ldc2-1.1.0-beta2-win64-msvc.zip は win32/64bit のクロスコンパイルが可能です。
+
 
 
 おおかまな手順を以下に示します。
