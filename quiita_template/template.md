@@ -10,9 +10,9 @@
 モジュールをインストールするには #import  \<module\> を使います
 
 
- 1. 番号
- 1. 番号
- 1. 番号
+1. 番号
+1. 番号
+1. 番号
 
 
 
@@ -42,6 +42,21 @@ int main()
 0. SWT Widgets https://www.eclipse.org/swt/widgets/
 0. SWT tips & samples http://cjasmin.fc2web.com/ 
 0. SWT - JavaでGUIプログラミング http://study-swt.info/index.html
+
+
+
+
+| Left align | Right align | Center align |
+|:-----------|------------:|:------------:|
+| This       |        This |     This     |
+| column     |      column |    column    |
+| will       |        will |     will     |
+| be         |          be |      be      |
+| left       |       right |    center    |
+| aligned    |     aligned |   aligned    |
+
+
+
 
 ##おわりに
 D言語, dwt, 誤字, 間違い、などなど色々と初心者なのでツッコミがありましたらよろしくお願いします。
