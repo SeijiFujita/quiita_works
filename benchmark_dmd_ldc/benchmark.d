@@ -1,5 +1,5 @@
 // Written in the D programming language.
-// dmd 2.071.0
+// dmd 2.071.1
 
 
 /*
@@ -43,6 +43,8 @@ double tarai(double x, double y, double z)
 	}
 }
 
+
+
 void benchMark_org(string title, void delegate() dg)
 {
 	import std.stdio : writeln;
@@ -51,7 +53,7 @@ void benchMark_org(string title, void delegate() dg)
 	
 	long[] sw;
 	writeln("# ", title, " bench ----");
-	foreach (i; 0 .. 10) {
+	foreach (i; 0 .. 5) {
 		long start = Clock.currStdTime() / 10_000;
 		//fib(40);
 		//taraid(22.0, 11.0, 0);
@@ -77,7 +79,6 @@ void benchMark_old(string title, void delegate() dg)
 {
 	import std.conv;
 	import core.time;
-//	import core.time : TickDuration, FracSec, msecs;
 	import std.datetime : StopWatch;
 	import std.algorithm.sorting : sort;
 	import std.stdio : writeln;
@@ -86,7 +87,7 @@ void benchMark_old(string title, void delegate() dg)
 	long[] tarray;
 	
 	writeln("# ", title, " ", buildID(), " bench ----");
-	foreach (i; 0 .. 10) {
+	foreach (i; 0 .. 5) {
 		timer.start();
 		//fib(40);
 		//taraid(22.0, 11.0, 0);
@@ -107,7 +108,6 @@ void benchMark_old(string title, void delegate() dg)
 	}
 	writeln("ave: ", total / tarray.length, "ms");
 }
-
 
 
 // class Collect(T)
@@ -140,7 +140,7 @@ struct Collect(T)
 	}
 }
 
-void benchMark_00(string title, void delegate() dg) {
+void benchMark(string title, void delegate() dg) {
 	import std.conv;
 	import core.time;
 	import std.datetime : StopWatch; //  ,TickDuration, msecs;
@@ -150,7 +150,7 @@ void benchMark_00(string title, void delegate() dg) {
 	// 	auto c = new Collect!(long);
 	Collect!(long) c;
 	writeln("# ", title, " ", buildID(), " bench ----");
-	foreach (i; 0 .. 10) {
+	foreach (i; 0 .. 5) {
 		timer.start();
 		dg();
 		timer.stop();
@@ -204,7 +204,7 @@ int main()
 	void takd() {
 		tarai(22.0, 11.0, 0.0);
 	}
-	benchMark_00("tarai int", &taki);
-	benchMark_00("tarai duble", &takd);
+	benchMark("tarai int", &taki);
+	benchMark("tarai duble", &takd);
 	return 0;
 }
