@@ -16,6 +16,7 @@
 1. dmd.2.071.1
 1. ldc2-1.0.0
 1. Visual Studio Community 2015
+1. Windows 10 Home ver 1511 / build 10586.545
 
 
 ## □とてもまじめな運用/基礎知識
