@@ -1,8 +1,7 @@
 
 ## □Ｄ言語 DMD/LDC のインストールメモ(Windows編)
 
-はじめてＤ言語をインストールする人の参考になればと思います。
-なお、誤字、間違い、などなど色々とツッコミがありましたら指摘よろしくお願いします。
+はじめてＤ言語をインストールする人の参考になればと思います。なお、誤字、間違い、などなど色々とツッコミがありましたら指摘よろしくお願いします。
 
 
 ## □今回の材料
@@ -16,23 +15,19 @@
 ## □とてもまじめな運用/基礎知識
 
 ### DMD/LDC のバージョン管理
-dmd はおおむね１～２ヶ月ほどで何かしらの新バージョンが公開されますが、
-まずインストールする前に changelog を見ましょう。
+dmd はおおむね１～２ヶ月ほどで何かしらの新バージョンが公開されますが、まずインストールする前に changelog を見ましょう。
 
 
 - dlang.org/changelog https://dlang.org/changelog/
 
 
 新バージョンをインストールしても古いバージョンは残しておきましょう。
-もし新バージョンで既存のコードにコンパイル時にエラーが出たらとりあえす、
-環境変数 PATH を以前バージョンに戻し作業優先させましょう。
-
-が！しかし、最近は破壊的な変更は全くなくなりました
-~~ので...これに意味があるのかどうかよくわかりません~~。
+もし新バージョンで既存のコードにコンパイル時にエラーが出たらとりあえす、環境変数 PATH を以前バージョンに戻し作業優先させましょう。
+が！しかし、最近は破壊的な変更は全くなくなりましたので...これに意味があるのかどうかよくわかりません。
 
 - ディレクトリのイメージ
-```console
 
+```text
 C:\D
 　├─dmd.1.076
 　├─dmd.2.063.2
@@ -44,14 +39,10 @@ C:\D
 　├─ldc2-1.0.0-win64-msvc
 　├─ldc2-1.1.0-beta2-win32-msvc
 　└─ldc2-1.1.0-beta2-win32-msvc
-
 ```
 
-
-
 ### Windows 64bitアプリケーションを作るには
-DMD は単体で 32bitアプリケーションを作る事ができますが、64bitアプリケーションは
-作る事ができません。
+DMD は単体で 32bitアプリケーションを作る事ができますが、64bitアプリケーションは作る事ができません。
 もちろん dmd -m64 オプションにより 64bitのObjectファイルを出力することができますが、
 付属の link.exe(optlink) は 16/32bit用なので Windows 64bitのリンクができません。
 そこで、Microsoft Visual C++ の link.exe/Runtime を利用し Windows 64bitアプリケーションを作ります。
@@ -70,9 +61,7 @@ DMD は単体で 32bitアプリケーションを作る事ができますが、6
 
 
 ### Visual C++ をインストール
-Visual C++ は Visual Studio Community 2015 よりインストール、
-インストールするパスはデフォルト、なお Visual C++ はオプションを
-指定しないとインストールされないので注意が必要です。
+Visual C++ は Visual Studio Community 2015 よりインストール、インストールするパスはデフォルト、なお Visual C++ はオプションを指定しないとインストールされないので注意が必要です。
 
 
 以下にダウンロードのリンクや解説サイトのリンク
@@ -102,8 +91,8 @@ Windowsインストーラ版を使い dmd 本体および Visual D のインス�
 注意点
 
 - ダウンロードページ内の Windowsインストーラ版(Windows exe)をダウンロード
-- インストール時に Visual D(Visual Studio D extension)をチェックしインストールしてください、
-- DMDをインストールするパスは 'C:\D' など間違いのないパスを指定しましょう。
+- インストール時に Visual D(Visual Studio D extension)をチェックしインストールしてください
+- DMDをインストールするパスは 'C:\D' など間違いのないパスを指定しましょう
 
 
 ![DMDInstaller_SelectVisualD.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_m64/DMDInstaller_SelectVisualD.png)
@@ -163,7 +152,7 @@ int main()
 
 
 - 実行用の Build.bat ファイル
-注意点は Build.bat の環境変数 path はdmd.exeのディレクトリを設定してください。
+注意点は Build.bat の環境変数 path は windows\bin\dmd.exeのディレクトリを設定してください。
 
 ```bat:Build.bat
 rem ---- DMD path
@@ -208,10 +197,7 @@ done...
 
 
 ## □LDCのインストール
-LDC はコンパイル済みのアーカイブが提供されていますので、それを展開しインストールします。
-もちろん既に、Visual C++ をインストールされている場合は再びインストール必要はありません!!
-詳しく追及していませんが現時点(LDC v1.0.0)では LDC はクロスコンパイルはできないようですので
-64bit .EXEを作るには LDC win64-msvc を 32bit .EXE を作るには LDC win32-msvc が必要です。
+LDC はコンパイル済みのアーカイブが提供されていますので、それを展開しインストールします。もちろん既に、Visual C++ をインストールされている場合は再びインストール必要はありません!!詳しく追及していませんが現時点(LDC v1.0.0)では LDC はクロスコンパイルはできないようですので 64bit .EXEを作るには LDC win64-msvc を 32bit .EXE を作るには LDC win32-msvc が必要です。
 
 - 補足 ldc2-1.1.0-beta2-win64-msvc.zip は win32/64bit のクロスコンパイルが可能です。
 
@@ -236,7 +222,7 @@ LDC はコンパイル済みのアーカイブが提供されていますので�
 
 ### LDC のインストールの確認
 
-- 実行用の Build.bat ファイル、ソースファイルは前回の hello.d を使います。
+- 実行用の Build_lcd.bat ファイル(ソースファイルは hello.d を使います)
 
 ```bat:Build_ldc.bat
 @echo off
@@ -259,7 +245,7 @@ pause
 
 - Build_ldc.bat の実行結果が以下のように表示されいればＯＫ
 
-```console
+```text
 Using Visual Studio: C:\Program Files (x86)\Microsoft Visual Studio 14.0\
 Hello! Win32/CRuntime_Microsoft
 #
@@ -276,8 +262,7 @@ done...
 
 
 ## □そして、おまけ
- dmd.2.071.1.windows.7z など展開して使っている場合やソースからビルドして使っている場合は、
-以下の sc.ini を置き換えると -m64 が有効になるかもしれません。
+ dmd.2.071.1.windows.7z などアーカイブを展開している場合やソースからビルドして使っている場合は、以下の sc.ini を置き換えると -m64 が有効になるかもしれません。
 
 
 
@@ -414,11 +399,10 @@ LIB=%LIB%;"%DXSDK_DIR%\Lib\x86"
 
 -------
 
--https://github.com/SeijiFujita/quiita_works/tree/master/using_m64
+
+-location https://github.com/SeijiFujita/quiita_works/tree/master/using_m64
 
 tag: dlang
-
 filename: using_m64.md
-
 last update: 2016/09/06
 
