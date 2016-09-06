@@ -5,12 +5,6 @@
 なお、誤字、間違い、などなど色々とツッコミがありましたら指摘よろしくお願いします。
 
 
-
-~~Windows 10 にアップデートしたことを機会に、DMD/LDC のインストールをあらためて見直しを行い
- Visual Studio も Community 2015に統合(まあ、不要な物もいっぱい入りますが)したのでメモにしました。~~
-
-
-
 ## □今回の材料
 
 1. dmd.2.071.1
@@ -56,7 +50,8 @@ C:\D
 
 
 ### Windows 64bitアプリケーションを作るには
-DMD は単体で 32bitアプリケーションを作る事ができますが、64bitアプリケーションは作る事ができません。
+DMD は単体で 32bitアプリケーションを作る事ができますが、64bitアプリケーションは
+作る事ができません。
 もちろん dmd -m64 オプションにより 64bitのObjectファイルを出力することができますが、
 付属の link.exe(optlink) は 16/32bit用なので Windows 64bitのリンクができません。
 そこで、Microsoft Visual C++ の link.exe/Runtime を利用し Windows 64bitアプリケーションを作ります。
@@ -417,9 +412,13 @@ LIB=%LIB%;"%DXSDK_DIR%\Lib\x86"
 
 
 
-----
+-------
+
 -https://github.com/SeijiFujita/quiita_works/tree/master/using_m64
+
 tag: dlang
+
 filename: using_m64.md
-last update: 2016/08/24
+
+last update: 2016/09/06
 
