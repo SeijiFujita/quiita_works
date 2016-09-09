@@ -1,5 +1,5 @@
 @echo off
-rem ---- DMD path
+rem ---- DMD
 path=C:\D\dmd.2.071.1\windows\bin;
 
 dmd -O -inline -release -boundscheck=off -m32 -ofbenchmark32.exe benchmark.d
@@ -13,6 +13,23 @@ benchmark32mscoff.exe
 dmd -O -inline -release -boundscheck=off -m64 -ofbenchmark64.exe benchmark.d
 @if ERRORLEVEL 1 goto :eof
 benchmark64.exe
+
+rem ---- LDC
+path=C:\D\ldc2-1.0.0-win32-msvc\bin;c:\windows\system32;
+ldc2 -release -boundscheck=off -m32 -ofbenchmark32_ldc.exe benchmark.d
+@if ERRORLEVEL 1 goto :eof
+benchmark32_ldc.exe
+
+path=C:\D\ldc2-1.0.0-win64-msvc\bin;c:\windows\system32;
+ldc2 -release -boundscheck=off -m64 -ofbenchmark64_ldc.exe benchmark.d
+@if ERRORLEVEL 1 goto :eof
+benchmark64_ldc.exe
+
+rem ---- Clang
+path=C:\D\Clang\bin;
+clang -o benchmark_clang.exe benchmark.c
+@if ERRORLEVEL 1 goto :eof
+benchmark_clang.exe
 
 
 echo done...
