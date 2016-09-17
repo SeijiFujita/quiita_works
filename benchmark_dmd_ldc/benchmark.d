@@ -119,6 +119,7 @@ string buildID()
 
 int main()
 {
+	enum int BENCHMARK_LOOP = 10;
 	void taki() {
 		tarai(22, 11, 0);
 	}
@@ -126,8 +127,8 @@ int main()
 		tarai_double(22.0, 11.0, 0.0);
 	}
 	xStopWatch s;
-	s.benchMark("tarai int", 10, &taki);
-	s.benchMark("tarai duble", 10, &takd);
+	s.benchMark("tarai int", BENCHMARK_LOOP, &taki);
+	s.benchMark("tarai duble", BENCHMARK_LOOP, &takd);
 	return 0;
 }
 

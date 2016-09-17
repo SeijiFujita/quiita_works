@@ -33,7 +33,7 @@ double tarai_double(double x, double y, double z)
 	if (x <= y) {
 		return z;
 	} else {
-		return tarai_double( tarai(x - 1.0, y, z), tarai_double(y - 1.0, z, x), tarai_double(z - 1.0, x, y) );
+		return tarai_double( tarai_double(x - 1.0, y, z), tarai_double(y - 1.0, z, x), tarai_double(z - 1.0, x, y) );
 	}
 }
 
@@ -91,49 +91,49 @@ long getElapsed(long long start)
 }
 
 
-#define LOOP5 10
+#define BENCHMARK_LOOP 10
 
 void benchMark_int(void)
 {
-	long sw[LOOP5];
+	long sw[BENCHMARK_LOOP];
 	printf("# tarai bench ----\n");
 	
-	for (int i = 0; i < LOOP5; i++) {
+	for (int i = 0; i < BENCHMARK_LOOP; i++) {
 		long long start = getTimeSpec();
 		tarai(22, 11, 0);
 		sw[i] = getElapsed(start);
 		// printf("%d: %ld\n", i, sw[i]);
 	}
-	qsort((void *)&sw, LOOP5, sizeof(long), lcomp);
+	qsort((void *)&sw, BENCHMARK_LOOP, sizeof(long), lcomp);
 	printf("fastest: %ldms\n", sw[0]);
-	printf("worst  : %ldms\n", sw[LOOP5 - 1]);
+	printf("worst  : %ldms\n", sw[BENCHMARK_LOOP - 1]);
 	
 	long total = 0;
-	for (int i = 0; i < LOOP5; i++) {
+	for (int i = 0; i < BENCHMARK_LOOP; i++) {
 		total += sw[i];
 	}
-	printf("average: %ldms\n", total / LOOP5);
+	printf("average: %ldms\n", total / BENCHMARK_LOOP);
 }
 void benchMark_double(void)
 {
-	long sw[LOOP5];
+	long sw[BENCHMARK_LOOP];
 	printf("# taraid bench ----\n");
 	
-	for (int i = 0; i < LOOP5; i++) {
+	for (int i = 0; i < BENCHMARK_LOOP; i++) {
 		long long start = getTimeSpec();
 		tarai_double(22, 11, 0);
 		sw[i] = getElapsed(start);
 		// printf("%d: %ld\n", i, sw[i]);
 	}
-	qsort((void *)&sw, LOOP5, sizeof(long), lcomp);
+	qsort((void *)&sw, BENCHMARK_LOOP, sizeof(long), lcomp);
 	printf("fastest: %ldms\n", sw[0]);
-	printf("worst  : %ldms\n", sw[LOOP5 - 1]);
+	printf("worst  : %ldms\n", sw[BENCHMARK_LOOP - 1]);
 	
 	long total = 0;
-	for (int i = 0; i < LOOP5; i++) {
+	for (int i = 0; i < BENCHMARK_LOOP; i++) {
 		total += sw[i];
 	}
-	printf("average: %ldms\n", total / LOOP5);
+	printf("average: %ldms\n", total / BENCHMARK_LOOP);
 }
 
 int main()

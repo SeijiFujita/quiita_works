@@ -1,17 +1,16 @@
 
 ## □DMD vs LDC ベンチマークテスト(Windows編)
 
-LDC は LLVM という汎用コンパイラのフレームワーク?で
-高速に実行されるコードの生成を行うのが特徴ですので、
-DMD よりどれほど早くなるのか気になるところです。
-ただし、LDC は残念ながら lld(LLVM 用のリンカ)は使っていないので
-リンク時の最適化はできないと思っています。
+DMD と LDC どの程度の違いがあるか試しました。LDC は LLVM という汎用コンパイラのフレームワークで高速に実行されるコードの生成を行うのが特徴ですので、DMD よりどれほど早くなるのか気になるところです。
+今回、LDC は残念ながら 最適化オプション -O を付けるとタイム計測ができなかったので最適化はされていません。
+なお、比較で Clang でも計測しましたがこちらも最適化オプション -O を付けるとタイム計測ができませんでした。
 
 
 ## □今回の材料
 
 1. dmd.2.071.1
 1. ldc2-1.0.0
+1. clang version 3.8.1 x86_64-pc-windows-msvc
 1. Windows 10 Home ver 1511 / build 10586.545
 
 
@@ -52,7 +51,7 @@ double tarai_double(double x, double y, double z)
 
 DMDコンパイラは tarai_int は思ったより早いですが double の演算は w64を使うべきですね。
 LDC は w64 は早いものの w32 はそれほど早くなくて意外です。
-なお LDC の最適化オプション -O を付けると、たらいまわし関数が計測出来ないので最適化オプションは付けませんでした。
+なお LDC の最適化オプション -O を付けると、たらいまわし関数の時間計測が 0秒で計測出来ないので最適化オプションは付けません。
 
 
 
@@ -66,6 +65,8 @@ LDC は w64 は早いものの w32 はそれほど早くなくて意外です。
 |*Clang/w64*                 |1670         |1640          |
 
 - 数値の単位はmsec
+
+
 
 ## □ソースコード
 
@@ -231,6 +232,7 @@ string buildID()
 
 int main()
 {
+	enum int BENCHMARK_LOOP = 10;
 	void taki() {
 		tarai(22, 11, 0);
 	}
@@ -238,8 +240,8 @@ int main()
 		tarai_double(22.0, 11.0, 0.0);
 	}
 	xStopWatch s;
-	s.benchMark("tarai int", 10, &taki);
-	s.benchMark("tarai duble", 10, &takd);
+	s.benchMark("tarai int", BENCHMARK_LOOP, &taki);
+	s.benchMark("tarai duble", BENCHMARK_LOOP, &takd);
 	return 0;
 }
 
@@ -282,7 +284,7 @@ double tarai_double(double x, double y, double z)
 	if (x <= y) {
 		return z;
 	} else {
-		return tarai_double( tarai(x - 1.0, y, z), tarai_double(y - 1.0, z, x), tarai_double(z - 1.0, x, y) );
+		return tarai_double( tarai_double(x - 1.0, y, z), tarai_double(y - 1.0, z, x), tarai_double(z - 1.0, x, y) );
 	}
 }
 
@@ -340,49 +342,49 @@ long getElapsed(long long start)
 }
 
 
-#define LOOP5 10
+#define BENCHMARK_LOOP 10
 
 void benchMark_int(void)
 {
-	long sw[LOOP5];
+	long sw[BENCHMARK_LOOP];
 	printf("# tarai bench ----\n");
 	
-	for (int i = 0; i < LOOP5; i++) {
+	for (int i = 0; i < BENCHMARK_LOOP; i++) {
 		long long start = getTimeSpec();
 		tarai(22, 11, 0);
 		sw[i] = getElapsed(start);
 		// printf("%d: %ld\n", i, sw[i]);
 	}
-	qsort((void *)&sw, LOOP5, sizeof(long), lcomp);
+	qsort((void *)&sw, BENCHMARK_LOOP, sizeof(long), lcomp);
 	printf("fastest: %ldms\n", sw[0]);
-	printf("worst  : %ldms\n", sw[LOOP5 - 1]);
+	printf("worst  : %ldms\n", sw[BENCHMARK_LOOP - 1]);
 	
 	long total = 0;
-	for (int i = 0; i < LOOP5; i++) {
+	for (int i = 0; i < BENCHMARK_LOOP; i++) {
 		total += sw[i];
 	}
-	printf("average: %ldms\n", total / LOOP5);
+	printf("average: %ldms\n", total / BENCHMARK_LOOP);
 }
 void benchMark_double(void)
 {
-	long sw[LOOP5];
+	long sw[BENCHMARK_LOOP];
 	printf("# taraid bench ----\n");
 	
-	for (int i = 0; i < LOOP5; i++) {
+	for (int i = 0; i < BENCHMARK_LOOP; i++) {
 		long long start = getTimeSpec();
 		tarai_double(22, 11, 0);
 		sw[i] = getElapsed(start);
 		// printf("%d: %ld\n", i, sw[i]);
 	}
-	qsort((void *)&sw, LOOP5, sizeof(long), lcomp);
+	qsort((void *)&sw, BENCHMARK_LOOP, sizeof(long), lcomp);
 	printf("fastest: %ldms\n", sw[0]);
-	printf("worst  : %ldms\n", sw[LOOP5 - 1]);
+	printf("worst  : %ldms\n", sw[BENCHMARK_LOOP - 1]);
 	
 	long total = 0;
-	for (int i = 0; i < LOOP5; i++) {
+	for (int i = 0; i < BENCHMARK_LOOP; i++) {
 		total += sw[i];
 	}
-	printf("average: %ldms\n", total / LOOP5);
+	printf("average: %ldms\n", total / BENCHMARK_LOOP);
 }
 
 int main()
@@ -391,6 +393,7 @@ int main()
 	benchMark_double();
 	return 0;
 }
+
 
 ```
 
@@ -406,5 +409,5 @@ int main()
 
 tag: dlang, tarai
 filename: using_m64.md
-last update: 2016/08/24
+last update: 2016/09/17
 
