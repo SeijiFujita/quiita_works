@@ -72,7 +72,7 @@ long long getTimeSpec()
 	long long result;
 	
 	timespec_get(&ts, TIME_UTC);
-	// clock_gettime(CLOCK_REALTIME, &ts1);
+	// clock_gettime(CLOCK_REALTIME, &ts);
 	result = (ts.tv_sec * 1000000000) + ts.tv_nsec;
 	return result;
 }
