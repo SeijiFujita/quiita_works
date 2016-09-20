@@ -12,7 +12,8 @@
 0. Windows版は実行時のランタイム(.dll)は不要
 0. SWTとソースレベルな互換性？があり、dwt の情報は少ないが SWT の情報を見ればなんとかなる
 0. dwt版 の jface など swt の一部は、2011年頃で更新を停止している
-0. 現状は32bit版のみ、64bit版は未確認
+0. 32/64bitのアプリケーションが作成可能
+0. StyledText()　がバグっている IME を使って漢字入力で落ちる 
 0. dwt を使っている人はとっても少なそうだw
 
 ##まずはインストール
@@ -268,12 +269,21 @@ void main() {
 0. SWT Widgets https://www.eclipse.org/swt/widgets/
 0. SWT tips & samples http://cjasmin.fc2web.com/ 
 0. SWT - JavaでGUIプログラミング http://study-swt.info/index.html
+0. SWT http://www.java2s.com/Code/Java/SWT-JFace-Eclipse/CatalogSWT-JFace-Eclipse.htm
+0. SWT http://www.java2s.com/Code/JavaAPI/org.eclipse.swt.widgets/Catalogorg.eclipse.swt.widgets.htm
+0. SWT http://www.java2s.com/Tutorial/Java/0280__SWT/Catalog0280__SWT.htm
+
 
 ##おわりに
 D言語, dwt, 誤字, 間違い、などなど色々と初心者なのでツッコミがありましたらよろしくお願いします。
 
+-------
+-location https://github.com/SeijiFujita/quiita_works/tree/master/using_dwt_01
+
 tag: dwt,dlang,SWT
 filename: using_dwt_01.md
-last update: 2015/03/13
+last update: 2016/09/20
+
+
 
 
