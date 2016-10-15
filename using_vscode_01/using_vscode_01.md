@@ -4,19 +4,18 @@
 
 
 Visual Studio Code(VSCode) Ｄ言語拡張機能のインテリセンス/オートコンプリートは、とても良い感じです。
-EmacsのFlycheckように呼び出し先の関数やテンプレートの定義も見る事ができます。
-多少うるさいです、たとえばパブリックな識別子にドキュメントがないぞ！とか、クラス名がガイドラインから外れているとか...
+EmacsのFlycheckように呼び出し先の関数・変数やテンプレートのコメントが見る事ができます。
+
+![vscode_dlang_intellisense.png](https://github.com/SeijiFujita/quiita_work/blob/master/using_vscode_01/vscode_dlang_intellisense.png)
 
 
-![vscode_dlang_intellisense.png](https://https://github.com/SeijiFujita/quiita_work/blob/master/using_vscode_01/vscode_dlang_intellisense.png)
+## 
 
+![vscode_dlang_err.png](https://github.com/SeijiFujita/quiita_work/blob/master/using_vscode_01/vscode_dlang_err.png)
 
-![vscode_dlang_err.png](vscode_dlang_err.png)
+![vscode_dlang_ext.png](https://github.com/SeijiFujita/quiita_work/blob/master/using_vscode_01/vscode_dlang_ext.png)
 
-![vscode_dlang_ext.png](vscode_dlang_ext.png)
-
-![vscode_dlang_setting.png](vscode_dlang_setting.png)
-
+![vscode_dlang_setting.png](https://github.com/SeijiFujita/quiita_work/blob/master/using_vscode_01/vscode_dlang_setting.png)
 
 
 
