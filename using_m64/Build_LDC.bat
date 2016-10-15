@@ -1,6 +1,5 @@
 @echo off
 path=C:\D\ldc2-1.0.0-win32-msvc\bin;c:\windows\system32;
-
 ldc2 -m32 -ofhello32.exe hello.d
 @if ERRORLEVEL 1 goto :eof
 hello32.exe
