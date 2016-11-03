@@ -1,6 +1,6 @@
 # Visual Studio Code(VSCode)のＤ言語拡張機能を使ってみた(Windows)
 
-Visual Studio Code(VSCode) のＤ言語拡張機能(webfreak.code-d)を試したのでゆるふわレポートです。<BR>
+Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(webfreak.code-d)を試してみました。
 
 
 ## 注意点
@@ -16,16 +16,10 @@ Visual Studio Code(VSCode) のＤ言語拡張機能(webfreak.code-d)を試した
 
 ## 実際の動作はこんな感じです
 ![vscode_dlang_intellisense.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_intellisense.png)
-<BR>
-<BR>
-<BR>
-<BR>
-
 
 ## VSCode + Ｄ言語拡張機能(webfreak.code-d)インストール
 
 Ｄ言語拡張機能の動作イメージは、workspace-d は code-d の要求にしたがって各種機能(dcd, dscanner)を呼び出します。
-
 
 ### インストールに必要なもの
 
@@ -36,12 +30,6 @@ Visual Studio Code(VSCode) のＤ言語拡張機能(webfreak.code-d)を試した
 1. dscanner シンタックスチェック
 1. dfmt ソースコードフォマッター
 1. ツールとして git, dub, dmd が必要
-<BR>
-<BR>
-<BR>
-
-
-
 
 
 ### VSCode のインストール 
@@ -50,29 +38,20 @@ VSCode 本体のダウンロード/インストールなど基本的な使い方
 
 1. VSCode Download https://code.visualstudio.com/Download 
 1. VSCode 基本的な使い方 http://www.atmarkit.co.jp/ait/articles/1507/10/news028.html
-<BR>
-<BR>
-<BR>
-
-
 
 ### Ｄ言語拡張機能のインストール 
 
-拡張機能を dlang で検索すると Ｄ言語拡張機能は２つありますので、D Programming Language(code-d) をインストールしてください。<BR>
-code-d インストール後　workspace-d.exe が無いとメッセージがでますが気にせず 一旦、VSCcode を終了し<BR>
+拡張機能を dlang で検索すると Ｄ言語拡張機能は２つありますので、D Programming Language(code-d) をインストールしてください。
+code-d インストール後　workspace-d.exe が無いとメッセージがでますが気にせず 一旦、VSCcode を終了し
 つぎの "workspace-d 側のインストール"に進んでください。
-<BR>
-<BR>
+
 Ｄ言語拡張機能は D Programming Language(code-d) を選択
-<BR>
 ![vscode_dlang_ext.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_ext.png)
-<BR>
-<BR>
-<BR>
+
 
 ### workspace-d 側のインストール
 
-以下のプログラムをビルド後に各.exeをディレクトリにまとめPATHを通してください。<BR>
+以下のプログラムをビルド後に各.exeをディレクトリにまとめPATHを通してください。
 Build.bat に手順をまとめました workspace-d.exe は 64bit でコンパイルしてください、32bit だと動きませんでした。
 
 1. workspace-d  https://github.com/Pure-D/workspace-d#workspace-d
@@ -132,20 +111,14 @@ pause
 ### Ｄ言語拡張機能の動作確認と設定
 
 
-VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdlibPath に druntime,phobos パスを要求されますので以下のように
-設定してください
-<BR>
-<BR>
-<BR>
+VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdlibPath に druntime,phobos パスを要求されますので以下のように設定してください
+
 
 ![vscode_dlang_setting.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_setting.png)
 
-<BR>
-<BR>
-
-
 
 ```json:settings.json
+
 // settings.json
 // 既定の設定を上書きするには、このファイル内に設定を挿入します
 {
@@ -157,15 +130,11 @@ VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdl
 
 ```
 
+## dub, dmd のエラーメッセージのソースコード行に移動する。
 
-
-
-
-## Dub, dmd のエラーメッセージのソースコード行に移動する。
-
-ワークスペースに直下に .vscode\tasks.json を配置すると vscode のタスク機能が有効になります<BR>
-ctrl+shift+b で　dub を実行しエラーメッセージを取り込みます。<BR>
-vscode のタスク機能は以下を参照してください。
+ワークスペースに直下に .vscode\tasks.json を配置すると vscode のタスク機能が有効になります
+ctrl+shift+b で　dub を実行しエラーメッセージを取り込みます。
+vscode のタスク機能の内容は以下を参照してください。
 
 - http://www.atmarkit.co.jp/ait/articles/1509/08/news019.html
 - https://code.visualstudio.com/Docs/editor/tasks
@@ -271,17 +240,19 @@ vscode のタスク機能は以下を参照してください。
 //--------------------------------------
     ]
 }
+
 ```
 
 
 ## 関連リンク
 
-- なおＤ言語のエディタ対応状況は http://wiki.dlang.org/Editors
+- Ｄ言語のエディタ対応状況 http://wiki.dlang.org/Editors
 
+-location https://github.com/SeijiFujita/quiita_works/tree/master/using_vscode_01
 
 tag: dlang,VSCode,Visual Studio Code
 
-filename: template_md
+filename: using_vscode_01.md
 
-last update: 2015/03/
+last update: 2016/11/03
 
