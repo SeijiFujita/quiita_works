@@ -1,0 +1,8 @@
+// 既定の設定とユーザー設定を上書きするには、このファイル内に設定を挿入します
+{
+    "d.stdlibPath": [
+        "C:\\D\\dmd.2071.2\\src\\druntime\\import",
+        "C:\\D\\dmd.2071.2\\src\\phobos"
+    ]
+
+}
