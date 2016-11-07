@@ -10,16 +10,17 @@ Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(webfreak.code-d)
 - Emacs の FlyCheck のようにコンパイルせずにエラーや警告を示します
 - マウスカーソルで関数や変数を指定するとエラーメッセージや関数定義のコメント行を見ることができる
 - dub サポートなど(Build関係)は作成中？動く機能と動かない機能がある
-- コンパイル/ビルド時にエラーのジャンプができない(タクスランナーで補えるので方法を紹介)
-- Ｄ言語拡張機能(webfreak.code-d) を動かすまでに試行錯誤した
-- 動作環境は Window10
+- ~~コンパイル/ビルド時にエラーのジャンプができない(タクスランナーで補えるので方法を紹介)~~
+- コンパイル/ビルド時にエラーのジャンプができる事を確認(code-d version 0.14.1)
+- Ｄ言語拡張機能(webfreak.code-d) を動かすまでにツールのビルドに試行錯誤した
+- 動作環境は Window10 で確認
 
 ## 実際の動作はこんな感じです
 ![vscode_dlang_intellisense.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_intellisense.png)
 
 ## VSCode + Ｄ言語拡張機能(webfreak.code-d)インストール
 
-Ｄ言語拡張機能の動作イメージは、workspace-d は code-d の要求にしたがって各種機能(dcd, dscanner)を呼び出します。
+Ｄ言語拡張機能の動作イメージは、workspace-d は code-d の要求にしたがって各種機能(dcd, dscanner, dfmt, dub)を呼び出します。
 
 ### インストールに必要なもの
 
@@ -111,7 +112,7 @@ pause
 ### Ｄ言語拡張機能の動作確認と設定
 
 
-VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdlibPath に druntime,phobos パスを要求されますので以下のように設定してください
+VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdlibPath に druntime,phobos パスを要求されるので以下のように設定
 
 
 ![vscode_dlang_setting.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_setting.png)
@@ -130,11 +131,11 @@ VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdl
 
 ```
 
-## dub, dmd のエラーメッセージのソースコード行に移動する。
+## VSCode のタスク機能で dub, dmd のエラーメッセージでソースコード行に移動する方法
 
-ワークスペースに直下に .vscode\tasks.json を配置すると vscode のタスク機能が有効になります
-ctrl+shift+b で　dub を実行しエラーメッセージを取り込みます。
-vscode のタスク機能の内容は以下を参照してください。
+1. ワークスペースに直下に .vscode\tasks.json を配置すると vscode のタスク機能が有効になります
+1. ctrl+shift+b で　dub を実行しエラーメッセージを取り込みます。
+1. VSCode のタスク機能の内容は以下を参照してください。
 
 - http://www.atmarkit.co.jp/ait/articles/1509/08/news019.html
 - https://code.visualstudio.com/Docs/editor/tasks
@@ -248,11 +249,12 @@ vscode のタスク機能の内容は以下を参照してください。
 
 - Ｄ言語のエディタ対応状況 http://wiki.dlang.org/Editors
 
--location https://github.com/SeijiFujita/quiita_works/tree/master/using_vscode_01
+----
+
+- location https://github.com/SeijiFujita/quiita_works/tree/master/using_vscode_01
+
 
 tag: dlang,VSCode,Visual Studio Code
-
 filename: using_vscode_01.md
-
-last update: 2016/11/03
+last update: 2016/11/08
 
