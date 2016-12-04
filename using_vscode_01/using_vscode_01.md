@@ -5,14 +5,14 @@ Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(webfreak.code-d)
 
 ## 注意点
 
-- Ｄ言語拡張機能(webfreak.code-d) はまだまだ作成中(2016/11/03 現在)
+- Ｄ言語拡張機能(webfreak.code-d) は、まだ作成中です(2016/11/03 現在)
 - インテリセンス/オートコンプリートは、ほぼ完成の域？に達しています素晴らしいです
 - Emacs の FlyCheck のようにコンパイルせずにエラーや警告を示します
 - マウスカーソルで関数や変数を指定するとエラーメッセージや関数定義のコメント行を見ることができる
 - dub サポートなど(Build関係)は作成中？動く機能と動かない機能がある
-- ~~コンパイル/ビルド時にエラーのジャンプができない(タクスランナーで補えるので方法を紹介)~~
-- コンパイル/ビルド時にエラーのジャンプができる事を確認(code-d version 0.14.1)
-- Ｄ言語拡張機能(webfreak.code-d) を動かすまでにツールのビルドに試行錯誤した
+- コンパイル/ビルド時にエラーのジャンプができない(タクスランナーで補えるので方法を紹介)
+- ~~コンパイル/ビルド時にエラーのジャンプができる事を確認(code-d version 0.14.1)~~ <= 間違えでした
+- Ｄ言語拡張機能(webfreak.code-d) を動かすまでにツールのビルドに試行錯誤
 - 動作環境は Window10 で確認
 
 ## 実際の動作はこんな感じです
@@ -20,7 +20,7 @@ Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(webfreak.code-d)
 
 ## VSCode + Ｄ言語拡張機能(webfreak.code-d)インストール
 
-Ｄ言語拡張機能の動作イメージは、workspace-d は code-d の要求にしたがって各種機能(dcd, dscanner, dfmt, dub)を呼び出します。
+さっそくインストールしてみましょう、使った感触ではＤ言語拡張機能の動作イメージは、各種機能(dcd, dscanner, dfmt, dub)を呼び出し機能を実現しているようです。
 
 ### インストールに必要なもの
 
@@ -35,7 +35,7 @@ Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(webfreak.code-d)
 
 ### VSCode のインストール 
 
-VSCode 本体のダウンロード/インストールなど基本的な使い方は以下が便利です。
+まずは VSCode 本体のダウンロード/インストールをしてください、基本的な使い方を読んで理解を深めましょう。
 
 1. VSCode Download https://code.visualstudio.com/Download 
 1. VSCode 基本的な使い方 http://www.atmarkit.co.jp/ait/articles/1507/10/news028.html
