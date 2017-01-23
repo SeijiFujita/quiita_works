@@ -1,7 +1,6 @@
-# VSCode のタスク機能で dub, dmd を使う
+# VSCode のタスク機能で dub, dmd (Ｄ言語)を使う
 
-
-1. ワークスペースに直下に .vscode\tasks.json を配置すると vscode のタスク機能が有効になります
+1. ワークスペースの直下に以下の .vscode\tasks.json を配置すると vscode のタスク機能が有効になります
 1. ctrl+shift+b で　dub を実行しエラーメッセージを取り込みます。
 1. VSCode のタスク機能の内容は以下を参照してください。
 

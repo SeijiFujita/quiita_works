@@ -1,125 +1,74 @@
-# Visual Studio Code(VSCode)のＤ言語拡張機能を使ってみた(Windows)
+# Visual Studio Code(VSCode)のＤ言語拡張機能(code-d)を使ってみた(Windows)
 
-Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(webfreak.code-d)を試してみました。
+Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(code-d)を試してみました。
 
+この記事を更新しました。(2017/01/23 現在)
 
-## 注意点
+## Topics
 
-- Ｄ言語拡張機能(webfreak.code-d) は、まだ作成中です(2016/11/03 現在)
-- インテリセンス/オートコンプリートは、ほぼ完成の域？に達しています素晴らしいです
+- Ｄ言語拡張機能(code-d ver 1.16.0) の状態のレポートです(2017/01/23 現在)
+- インテリセンス/オートコンプリートは、ほぼ完成の域に達しています素晴らしいです
 - Emacs の FlyCheck のようにコンパイルせずにエラーや警告を示します
 - マウスカーソルで関数や変数を指定するとエラーメッセージや関数定義のコメント行を見ることができる
-- dub サポートなど(Build関係)は作成中？動く機能と動かない機能がある
-- コンパイル/ビルド時にエラーのジャンプができない(タクスランナーで補えるので方法を紹介)
-- ~~コンパイル/ビルド時にエラーのジャンプができる事を確認(code-d version 0.14.1)~~ <= 間違えでした
-- Ｄ言語拡張機能(webfreak.code-d) を動かすまでにツールのビルドに試行錯誤
-- 動作環境は Window10 で確認
+- dub project の作成, project GUIエディタなどなど問題なく使える
+- import 文の追加の支援機能がおもしろい(code-d version 0.16.0)
+- コンパイルエラーがなくなると自動的にビルドします(code-d version 0.16.0)
+- 動作環境は Window10 で確認/他の環境でも問題はなさそうです(作者はWindows 環境を持っていないかも？)
+- さらに詳しい話は code-d home  https://github.com/Pure-D/code-d/wiki
 
 ## 実際の動作はこんな感じです
 ![vscode_dlang_intellisense.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_intellisense.png)
 
-## VSCode + Ｄ言語拡張機能(webfreak.code-d)インストール
+## Ｄ言語拡張機能(code-d)インストール
 
-さっそくインストールしてみましょう、使った感触ではＤ言語拡張機能の動作イメージは、各種機能(dcd, dscanner, dfmt, dub)を呼び出し機能を実現しているようです。
 
 ### インストールに必要なもの
 
-1. VSCode 本体 
-1. Ｄ言語拡張機能(webfreak.code-d)
-1. workspace-d 以下の dcd,dscanner,dfmt,dub をコントロール　
-1. dcd - オートコンプリート・コードナビゲート
-1. dscanner シンタックスチェック
-1. dfmt ソースコードフォマッター
-1. ツールとして git, dub, dmd が必要
+- VSCode 本体
+- Ｄ言語拡張機能(code-d)
+- workspace-d 以下の dcd,dscanner,dfmt,dub をコントロール　
+- dcd - オートコンプリート・コードナビゲート
+- dscanner シンタックスチェック
+- dfmt ソースコードフォマッタ
+- 以上をビルドするツールとして git, dub, dmd, ldc2 が必要です
 
+
+### インストールを行う順番 
+
+1. 各種ツールをビルドしPATHを通す
+1. VScode がインストールされていない場合はインストール
+1. VSCode の拡張機能で dlang を検索し "D Programing Language(code-d)" をインストールまたはアップデートを行う
+1. VSCode メニューの ファイル -> 基本設定 -> ユーザ設定 ->  D configration で設定を行う
+1. 拡張機能を初めてインストールする場合は、D言語の標準ライブラリ(phobos,)
+
+
+### 各種ツールをビルドしPATHを通す
+
+- Ｄ言語拡張機能(code-d)のアップデート 
 
 ### VSCode のインストール 
 
-まずは VSCode 本体のダウンロード/インストールをしてください、基本的な使い方を読んで理解を深めましょう。
+VSCode 本体のダウンロード/インストール、基本的な使い方を読んで理解を深めましょう。
 
 1. VSCode Download https://code.visualstudio.com/Download 
 1. VSCode 基本的な使い方 http://www.atmarkit.co.jp/ait/articles/1507/10/news028.html
 
+
 ### Ｄ言語拡張機能のインストール 
 
-拡張機能を dlang で検索すると Ｄ言語拡張機能は２つありますので、D Programming Language(code-d) をインストールしてください。
-code-d インストール後　workspace-d.exe が無いとメッセージがでますが気にせず 一旦、VSCcode を終了し
-つぎの "workspace-d 側のインストール"に進んでください。
+VSCodeを起動し拡張機能で "dlang" で検索、 Ｄ言語拡張機能は２つありますので、D Programming Language(code-d) をインストール  
 
 Ｄ言語拡張機能は D Programming Language(code-d) を選択
+
+
 ![vscode_dlang_ext.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_ext.png)
 
 
-### workspace-d 側のインストール
-
-以下のプログラムをビルド後に各.exeをディレクトリにまとめPATHを通してください。
-Build.bat に手順をまとめました workspace-d.exe は 64bit でコンパイルしてください、32bit だと動きませんでした。
-
-1. workspace-d  https://github.com/Pure-D/workspace-d#workspace-d
-1. dcd - auto completion https://github.com/Hackerpilot/DCD
-1. dscanner - dlang code linting https://github.com/Hackerpilot/Dscanner
-1. 必須ではないが非常に便利です。dfmt - dlang code formatting https://github.com/Hackerpilot/dfmt
-
-
-```bat:Build.bat
-
-git clone https://github.com/Pure-D/workspace-d.git
-git clone https://github.com/Hackerpilot/DCD.git
-git clone https://github.com/Hackerpilot/Dscanner.git
-git clone https://github.com/Hackerpilot/dfmt.git
-rem git clone --recursive https://github.com/Hackerpilot/Dscanner.git
-rem git clone --recursive https://github.com/Hackerpilot/dfmt.git
-
-mkdir bin
-
-pushd workspace-d
-rem dub build --compiler=ldc2 --arch=x86_64 --combined --build=release
-dub build --compiler=dmd  --arch=x86_64 --combined --build=release
-copy workspace-d.exe ..\bin
-popd
-
-rem goto :eof
-
-pushd DCD
-dub build --combined --arch=x86_64 --build=release --config=client
-dub build --combined --arch=x86_64 --build=release --config=server
-copy dcd-client.exe ..\bin
-copy dcd-server.exe ..\bin
-popd
-
-rem goto :eof
-
-pushd Dscanner
-dub build --compiler=dmd  --arch=x86_64 --combined --build=release
-copy dscanner.exe ..\bin
-rem call build.bat
-rem libdparse　のエラーが出たら
-rem dub.json: "libdparse": "0.7.0-beta.2", -> "libdparse": "0.7.0-beta.1",
-popd
-
-rem goto :eof
-
-pushd dfmt
-dub build --compiler=dmd  --arch=x86_64 --combined --build=release
-copy dscanner.exe ..\bin
-rem call build.bat
-popd
-
-pause
-
-```
-
 ### Ｄ言語拡張機能の動作確認と設定
 
-
-VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdlibPath に druntime,phobos パスを要求されるので以下のように設定
-
-
-![vscode_dlang_setting.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_setting.png)
-
+拡張機能の d.stdlibPath が正しく設定されていない場合は要求されるので、dmdの標準ライブラリのPATHを以下のように設定
 
 ```json:settings.json
-
 // settings.json
 // 既定の設定を上書きするには、このファイル内に設定を挿入します
 {
@@ -128,122 +77,13 @@ VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdl
         "C:\\D\\dmd.2071.2\\src\\phobos"
     ]
 }
-
 ```
-
-## VSCode のタスク機能で dub, dmd のエラーメッセージでソースコード行に移動する方法
-
-1. ワークスペースに直下に .vscode\tasks.json を配置すると vscode のタスク機能が有効になります
-1. ctrl+shift+b で　dub を実行しエラーメッセージを取り込みます。
-1. VSCode のタスク機能の内容は以下を参照してください。
-
-- http://www.atmarkit.co.jp/ait/articles/1509/08/news019.html
-- https://code.visualstudio.com/Docs/editor/tasks
+  
+![vscode_dlang_setting.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_01/vscode_dlang_setting.png)
 
 
-```json:tasks.json
-// .vscode/tasks.json
-{
-    "version": "0.1.0",
-    "command": "cmd",
-    "args": ["/c"],
-    "isShellCommand": true,
-    "echoCommand": true,
-    "showOutput": "always",
-    "tasks": [
-        {
-            "taskName": "dub build",
-            // ctrl+shift+t
-            // "isTestCommand": true,
-            // ctrl+shift+b
-            "isBuildCommand": true,
-            "suppressTaskName": true,
-            "args": ["dub", "build"],
-            "problemMatcher": {
-                "owner": "dub",
-                "fileLocation": ["relative", "${workspaceRoot}"],
-                "pattern":
-                {
-                    // The regular expression. Example to match:
-                    //source\app.d(36,2): Error: undefined identifier 'riteln', did you mean template 'writeln(T...)(T args)'?
-                    "regexp": "^(.*)\\((\\d+),(\\d+)\\):\\s+(Error|Warning):\\s+(.*)$",
-                    // The first match group matches the file name which is relative.
-                    "file": 1,
-                    // The second match group matches the line on which the problem occurred.
-                    "line": 2,
-                    // The third match group matches the column at which the problem occurred.
-                    "column": 3,
-                    // The fourth match group matches the problem's severity. Can be ignored. Then all problems are captured as errors.
-                    "severity": 4,
-                    // The fifth match group matches the message.
-                    "message": 5
-                }
-            }
-        },
-        {
-            "taskName": "dmd @Respons",
-            // "isBuildCommand": true,
-            // "isTestCommand": true,
-            "suppressTaskName": true,
-            "args": ["dmd", "@Respons.txt"],
-            "problemMatcher": {
-                "owner": "dmd",
-                "fileLocation": ["relative", "${workspaceRoot}"],
-                "pattern":
-                {
-                    // The regular expression. Example to match:
-                    //hello.d(26): Error: undefined identifier 'at', did you mean function 'cat'?
-                    "regexp": "^(.*)\\((\\d+)\\):\\s+(Error|Warning):\\s+(.*)$",
-                    // The first match group matches the file name which is relative.
-                    "file": 1,
-                    // The second match group matches the line on which the problem occurred.
-                    "line": 2,
-                    // The third match group matches the column at which the problem occurred.
-                    // "column": 3,
-                    // The fourth match group matches the problem's severity. Can be ignored. Then all problems are captured as errors.
-                    "severity": 3,
-                    // The fifth match group matches the message.
-                    "message": 4
-                }
-            }
-        },
-        {
-            "taskName": "dmd-unittest",
-            "isBuildCommand": false,
-            "suppressTaskName": true,
-            "args": ["dmd", "-unittest", "${file}"],
-            "problemMatcher": {
-                "owner": "dmd",
-                "fileLocation": ["relative", "${workspaceRoot}"],
-                "pattern":
-                {
-                    // The regular expression. Example to match:
-                    //hello.d(26): Error: undefined identifier 'at', did you mean function 'cat'?
-                    "regexp": "^(.*)\\((\\d+)\\):\\s+(Error|Warning):\\s+(.*)$",
-                    // The first match group matches the file name which is relative.
-                    "file": 1,
-                    // The second match group matches the line on which the problem occurred.
-                    "line": 2,
-                    // The third match group matches the column at which the problem occurred.
-                    // "column": 3,
-                    // The fourth match group matches the problem's severity. Can be ignored. Then all problems are captured as errors.
-                    "severity": 3,
-                    // The fifth match group matches the message.
-                    "message": 4
-                }
-            }
-        },
-        {
-            "taskName": "make",
-            "suppressTaskName": true,
-            "args": ["make"]
-        }
-//--------------------------------------
-    ]
-}
 
-```
-
+以上、バリバリコードを書きましょう！
 
 ## 関連リンク
 
@@ -256,5 +96,5 @@ VSCode を起動し、Ｄ言語のソースコードの編集をすると d.stdl
 
 tag: dlang,VSCode,Visual Studio Code
 filename: using_vscode_01.md
-last update: 2016/11/08
+last update: 2017/01/23
 
