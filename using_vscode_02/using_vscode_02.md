@@ -2,6 +2,9 @@
 
 code-d 0.16.0 + workspace-d 2.10.0 released (2017/1/22)されたので試してみました。
 
+新規にVSCodeからインストールする場合は[ここを参照](http://qiita.com/sfujita/items/24c47b68f15d24f0c03e)
+
+
 ## Topics
 
 - import 文の追加支援機能がおもしろい(Auto-Fix for issues like missing imports)
@@ -12,7 +15,7 @@ code-d 0.16.0 + workspace-d 2.10.0 released (2017/1/22)されたので試して�
 
 
 ## Ｄ言語拡張機能のインストールとアップデート
-また、初めてインストールする場合もツール類を実行できる環境を作った後に VSCode の拡張機能のインストールを行うことでスムーズに
+初めてインストールする場合もツール類を実行できる環境を作った後に VSCode の拡張機能のインストールを行うことでスムーズに
 インストールできると思います。
 
 0. 各種ツールをビルドしPATHを通す
@@ -32,7 +35,7 @@ code-d 0.16.0 + workspace-d 2.10.0 released (2017/1/22)されたので試して�
 
 以下の Build.bat で git clone ->　コンパイル -> できたバイナリを　Binディレクトリに集めるので PATH を通してください。
 
-'''Build.bat
+```bat:Build.bat
 
 git clone https://github.com/Pure-D/workspace-d.git
 git clone https://github.com/Hackerpilot/DCD.git
@@ -84,60 +87,14 @@ copy dscanner.exe ..\bin
 popd
 
 pause
-'''
-
-
-## VSCode の拡張機能で D Programing Language(code-d) インストール・アップデート
-
-
-
-## code-d  https://github.com/Pure-D/code-d/wiki
-
-
-- Full DUB integration
-- Syntax highlighting for D,
-- script.d from arsd,
-- DlangUI markup language,
-- SDL files,
-- vibe.d Diet files
-- Snippets
-- Auto-Completion & static linting for dub.json files, dub.sdl files and DlangUI markup language
-- GUI Editor for dub.json files
-- Auto-Completion for D using DCD
-- Showing calltips & documentation using DCD
-- Finding global symbols using DCD
-- Navigating through the code using features like Go to definition using DCD
-- Formatting the document using Dfmt
-- Outlining the document and jumping to various functions using Dscanner
-- Statically linting the code using Dscanner
-- Dynamically showing compilation errors by invoking dub without any binary output
-- Building, running & debugging the project from within VSCode
-- Uploading code sections to dpaste.com
-- Showing GC calls from the profilegc.log file
-- Instantly running D source files using RDMD
-- Auto-Fix for issues like missing imports
-
-
-Auto-Completion, code-Lining
-
-
-## 実際の動作はこんな感じです
-
-## VSCode + Ｄ言語拡張機能(webfreak.code-d)インストール
-
-さっそくインストールしてみましょう、使った感触ではＤ言語拡張機能の動作イメージは、各種機能(dcd, dscanner, dfmt, dub)を呼び出し機能を実現しているようです。
-
-
-## 関連リンク
-
-- Ｄ言語のエディタ対応状況 http://wiki.dlang.org/Editors
+```
 
 ----
 
-- location https://github.com/SeijiFujita/quiita_works/tree/master/using_vscode_01
+- location https://github.com/SeijiFujita/quiita_works/tree/master/using_vscode_02
 
 
 tag: dlang,VSCode,Visual Studio Code
 filename: using_vscode_02.md
-last update: 2016/11/08
+last update: 2017/01/23
 
