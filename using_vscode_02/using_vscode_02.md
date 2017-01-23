@@ -1,4 +1,4 @@
-# Ｄ言語拡張機能(code-d)のアップデート(Windows)
+# Ｄ言語拡張機能(code-d 0.16.0)のアップデート(Windows)
 
 code-d 0.16.0 + workspace-d 2.10.0 released (2017/1/22)されたので試してみました。
 
@@ -26,14 +26,17 @@ code-d 0.16.0 + workspace-d 2.10.0 released (2017/1/22)されたので試して�
 
 
 ## 各種ツールをビルドしPATHを通す
-ビルドするには git, dmd, ldc2 が必要です。なお、workspace-d は ldc2 でコンパイルするようにassertされています。
+ビルドするには git, dmd, ldc2 が必要です。workspace-d は ldc2 でビルドする必要があると assert 文が入っているので深くは追及していない
+
 
 - workspace-d  https://github.com/Pure-D/workspace-d
 - DCD  https://github.com/Hackerpilot/DCD
 - dfmt  https://github.com/Hackerpilot/dfmt.git
 - Dscanner  https://github.com/Hackerpilot/Dscanner
+- Dscanner は dub でビルド出来ないので Dscanner/build.bat を使用(64bit でビルドするには -m64 を追加する必要がある)
 
-以下の Build.bat で git clone ->　コンパイル -> できたバイナリを　Binディレクトリに集めるので PATH を通してください。
+
+以下の Build.bat は git clone -> コンパイル -> できたバイナリを Binディレクトリに集めるので PATH を通してください。
 
 ```bat:Build.bat
 
@@ -96,5 +99,5 @@ pause
 
 tag: dlang,VSCode,Visual Studio Code
 filename: using_vscode_02.md
-last update: 2017/01/23
+last update: 2017/01/24
 
