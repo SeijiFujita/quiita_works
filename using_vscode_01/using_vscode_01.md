@@ -3,6 +3,7 @@
 Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(code-d)を試してみました。
 
 この記事を更新しました。(2017/01/23 現在)
+[Ｄ言語拡張機能(code-d)のアップデート](http://qiita.com/sfujita/items/3d35bd41eead60975639) 
 
 ## Topics
 
