@@ -10,7 +10,7 @@ Visual Studio Code(VSCode) の初心者がＤ言語拡張機能(code-d)を試し
 - インテリセンス/オートコンプリートは、ほぼ完成の域に達しています素晴らしいです
 - Emacs の FlyCheck のようにコンパイルせずにエラーや警告を示します
 - マウスカーソルで関数や変数を指定するとエラーメッセージや関数定義のコメント行を見ることができる
-- dub project の作成, project GUIエディタなどなど問題なく使える
+- code-d: Create new Projectなど問題なく使える
 - import 文の追加の支援機能がおもしろい(code-d version 0.16.0)
 - コンパイルエラーがなくなると自動的にビルドします(code-d version 0.16.0)
 - 動作環境は Window10 で確認/他の環境でも問題はなさそうです(作者はWindows 環境を持っていないかも？)
@@ -96,5 +96,5 @@ VSCodeを起動し拡張機能で "dlang" で検索、 Ｄ言語拡張機能は�
 
 tag: dlang,VSCode,Visual Studio Code
 filename: using_vscode_01.md
-last update: 2017/01/23
+last update: 2017/01/25
 
