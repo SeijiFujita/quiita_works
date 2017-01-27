@@ -1,32 +1,40 @@
-# D言語のツールを列挙する(初心者向け)
+# D言語のツールを列挙する
 
 D言語のツール類を列挙する(2017/01)
 
-----
+# vscode
+vscode 面白い
 
-## dfmt
+# dfmt
 D言語ソースファイル フォーマッタ
 https://github.com/Hackerpilot/dfmt
 
-----
 
-## dfix
+# dfix
 古いD言語の構文などを新しい書式に変更する
 https://github.com/Hackerpilot/dfix
 
-----
 
-## undeaD
+# undeaD
 廃止になった Phobosモジュール(標準ライブラリ)を最新のコンパイラで使うためのライブラリ
 https://github.com/dlang/undeaD
 
-----
 
-## Dlang IDE
+# DlangIDE
 D言語で書かれているD言語の統合開発環境、dub run 一発でビルド・実行できる。
 https://github.com/buggins/dlangide
 
-----
+
+# dwt
+swt windows版 
+dub に入ってなかったり、時代に取り残されそう〰
+
+# Gtkd
+
+
+
+# dfl
+もう終わり感が半端ない
 
 
 ## おわりに
