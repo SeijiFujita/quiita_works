@@ -2,48 +2,73 @@
 
 Clang でデバックしていてＤ言語もこんな簡単にデバックできたら...と、試したところ簡単にデバックできました。
 よく考えると ６４ビット環境はＭＳのツールで作成しているので使えて当たり前？なのかもしれません。
-なお、３２ビット環境のデバッグは色々試していますが成功していません、３２ビット
 
-## 必要なもの
+
+## 必要なツールとデバック出来る環境
 
 - VSCode(Visual Studio Code) 本体
-- D Programing Language code-d (webfreak.code-d) 
+- MS-CppTools(MS-vscode-CppTools)
 - Native-debug(webfreak.debug)
+- D Programing Language code-d (webfreak.code-d) 
+
+
+### デバック可な環境
+- windows 64bit(dmd -g -m64)
+- windows 32bit mscoff (dmd -g -m32mscoff) 
+
+
+### デバックできなかった
+- windows 32bit omf (dmd -g -m32) でデバックをスタートすると、すぐに Exception で落ちてしまいます。
+
+
+## インストール手順
+code-d 以外は特に問題なくインストールできるので拡張機能の画像を張っておきます、code-d のインストールは[こちらを参照してくだい](http://qiita.com/sfujita/items/24c47b68f15d24f0c03e)
+
 - MS-CppTools(MS-vscode-CppTools)
 
-## インストール
-code-d 以外は特に問題なくインストールできるので拡張機能の画像を張っておきます、code-d のインストールは[こちらを参照してくだい]()
+![ms-cpptools.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/ms-cpptools.png)
 
-ms-cpptools.png
-native-debug.png
-code-d.png
+
+- Native-debug(webfreak.debug)
+
+![native-debug.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/native-debug.png)
+
+
+- D Programing Language code-d (webfreak.code-d) 
+
+![code-d.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/code-d.png)
+
 
 ## デバックの手順
 
-1. デバックするプログラムを用意します(画像は code-d: Create new project -> Basic Console App)
-2. ステータスバーをクリックしてアーキテクチャを X64_86 ビルドタイプ debug に変更しビルド(code-d : Build project)します
+1. インストールが出来たら早速デバックが開始できます。まずはデバックするプログラムを用意します(画像は code-d: Create new project -> Basic Console App)、ステータスバーをクリックしてアーキテクチャを X64_86 ビルドタイプ debug に変更しビルド(code-d : Build project)します
 
-debug-step1.png
-
-3. デバッグの設定ファイル(launch.json)を作るために、コマンドパレットを開き Debug: Open launch.json -> C++(Windows) を選択
-
-debug-step2.png
-debug-step3.png
-
-4. launch.json の "Program" : "${workspaceRoot}/debug-test.exe" をデバッグするプログラムに書き換えます
-
-debug-step4.png
-
-5. VSCodeのデバッグ(Ctrl+Shift+D)画面を開きます、ソースコードを表示してブレークポイント(画像の赤丸)をマウスで設定します
-
-debug-step5.png
-
-6. ファンクションキーの F5 でデバックをスタートさせます。
-
-debug-step6.png
+![debug-step1.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/debug-step1.png)
 
 
-7. 以上
+2. デバッグの設定ファイル(launch.json)を作るために、コマンドパレットを開き Debug: Open launch.json -> C++(Windows) を選択
+
+![debug-step2.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/debug-step2.png)
+
+![debug-step3.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/debug-step3.png)
+
+
+3. launch.json の "Program" : "${workspaceRoot}/debug-test.exe" をデバッグするプログラムに書き換えます
+
+![debug-step4.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/debug-step4.png)
+
+
+4. VSCodeのデバッグ(Ctrl+Shift+D)画面を開きます、ソースコードを表示してブレークポイント(画像の赤丸)をマウスで設定します
+
+![debug-step5.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/debug-step5.png)
+
+
+5. ファンクションキーの F5 でデバックをスタートさせます。
+
+![debug-step6.png](https://raw.githubusercontent.com/SeijiFujita/quiita_works/master/using_vscode_05/pics/debug-step6.png)
+
+
+6. 以上 / nice debug!
 
 
 
